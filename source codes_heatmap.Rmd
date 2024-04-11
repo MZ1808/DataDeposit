@@ -1,0 +1,116 @@
+#setup
+```{r}
+library(gplots)
+library(DESeq2)
+library(dplyr)
+library(ggpubr)
+library(remotes)
+library(forcats)
+
+ # distance function = 1-PCC (Pearson's correlation coefficient)
+dist2 <- function(x, ...) {
+  as.dist(1-cor(t(x), method="pearson"))
+}
+  
+
+hclust2 <- function(x, method="average", ...)  
+  
+  # average linkage in hierarchical clustering
+  hclust(x, method=method, ...)
+
+
+detectGroups <- function (x){  # x are col names
+  tem <- gsub("[A-Z]*$","",x) # Remove all letters from end
+  tem <- gsub("[0-9]","",tem); # Remove all numbers from end
+  return( tem )
+}
+
+```
+
+#import data
+#merged 3 input
+```{r, fig.width=1.8,fig.height=3.5}
+all_data_1=read.csv('D:/SARS/C_SP_clean.csv',header=1)
+all_data_2=read.csv('D:/SARS/C_SAE_clean.csv',header=1)
+all_data_3=read.csv('D:/SARS/SP_SAE_clean.csv',header=1)
+
+all_data_all=inner_join(x = all_data_1, y = all_data_2, by = 'gene_name')
+all_data_all=inner_join(x = all_data_all, y = all_data_3, by = 'gene_name')
+
+all_data_all=as.data.frame(all_data_all)
+rownames(all_data_all)=all_data_all$gene_name
+
+all_data=all_data_all
+```
+
+#genes
+```{r}
+library(AnnotationDbi)
+library(org.Hs.eg.db)
+library(gageData)
+library(gage)
+
+data(kegg.sets.hs)
+data(sigmet.idx.hs)
+
+keggData<- kegg.gsets(species = "hsa", id.type = "entrez", check.new=T)
+kegg.sets.hs<- keggData$kg.sets
+
+hsa_path<-as.data.frame(kegg.sets.hs$`hsa04218 Cellular senescence`)
+colnames(hsa_path)<-"entrez"
+hsa_path$id=mapIds(org.Hs.eg.db,key=hsa_path$entrez,column="SYMBOL",keytype="ENTREZID")
+ids1<-as.data.frame(hsa_path$id)
+colnames(ids1)=c("gene_name")
+
+select_genes=inner_join(x = ids1, y = all_data, by = 'gene_name')
+rownames(select_genes)=select_genes$gene_name
+select_genes=select_genes[,-1]
+select_genes=select_genes[rowSums(select_genes[1:6])>0,]
+select_genes=select_genes[rowSums(select_genes[19:21])>0,]
+```
+
+#significant only
+```{r}
+select_genes=subset(select_genes, FDR..y<0.05 ) #Ctrl vs SAE
+select_genes=subset(select_genes, FDR..x<0.05 ) #Ctrl vs SP
+select_genes=subset(select_genes, FDR.<0.05 ) #SP vs SAE
+```
+
+#***heatmap (TPM)
+```{r,fig.height=4,fig.width=4}
+	lmat = rbind(c(5,1),c(3,2),c(4,4))
+	lwid = c(1,4)
+	lhei = c(1,20,0.1) #image size varies
+
+x<-dplyr::select(select_genes,1,2,3,4,5,6,19,20,21)
+
+colnames(x)
+detectGroups(colnames(x))
+groups = detectGroups(colnames(x) )
+groups.colors = c("cyan","purple","magenta")
+
+x=as.matrix(x)
+
+heatmap.2(x, Rowv=T,Colv=FALSE, distfun = dist2,hclustfun=hclust2,
+	 col=bluered(75), density.info="none", trace="none", scale="row", keysize=0.3
+	,key=T, symkey=F
+	,ColSideColors=groups.colors[ as.factor(groups)]
+	,margins=c(5,6)
+	,cexRow=0.8
+	,srtCol=45
+	,cexCol=0.8  # size of font for sample names
+	,lmat = lmat, lwid = lwid, lhei = lhei
+	,main=title
+	)
+
+# color key
+heatmap.2(x, Rowv=F, Colv=FALSE, distfun = dist2,hclustfun=hclust2,
+	 col=bluered(75), density.info="none", trace="none", scale="row", keysize=0.8
+	,key=T, symkey=F
+	,ColSideColors=groups.colors[ as.factor(groups)]
+	,cexRow=0.8
+	,srtCol=45
+	,cexCol=1  # size of font for sample names
+	,lmat = lmat, lwid = c(4,2), lhei = c(4,5,2)
+	)
+```

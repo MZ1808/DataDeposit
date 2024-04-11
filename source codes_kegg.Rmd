@@ -1,0 +1,117 @@
+#setup
+```{r}
+library(gplots)
+library(DESeq2)
+library(dplyr)
+library(ggpubr)
+library(remotes)
+library(forcats)
+```
+
+#import data
+#C_SP
+```{r}
+all_data=read.csv('D:/SARS/C_SP_clean.csv',header=1)
+rownames(all_data)=all_data$gene_name
+
+title="Ctrl vs SP"
+```
+
+#C_SAE
+```{r}
+all_data=read.csv('D:/SARS/C_SAE_clean.csv',header=1)
+rownames(all_data)=all_data$gene_name
+
+title="Ctrl vs SAE"
+```
+
+#SP_SAE
+```{r}
+all_data=read.csv('D:/SARS/SP_SAE_clean.csv',header=1)
+rownames(all_data)=all_data$gene_name
+
+title="SP vs SAE"
+```
+
+#KEGG setup
+```{r}
+library(gage)
+library(gageData)
+
+data(kegg.sets.hs)
+data(sigmet.idx.hs)
+
+keggData<- kegg.gsets(species = "hsa", id.type = "entrez", check.new=T)
+kegg.sets.hs<- keggData$kg.sets
+
+totalGeneSet=nchar(kegg.sets.hs)
+totalGeneSet=as.data.frame(totalGeneSet)
+totalGeneSet$GeneNoTotal=stringi::stri_count_boundaries(kegg.sets.hs)
+totalGeneSet$id=row.names(totalGeneSet)
+
+library(AnnotationDbi)
+library(org.Hs.eg.db)
+```
+
+#kegg
+```{r}
+#2 groups only 
+
+volcano_data=all_data
+volcano_data$log2Fold.Change<-log2(volcano_data$Real.Fold.Change)
+volcano_data$log2Fold.Change [volcano_data$Regulation.Type == "Down"] <- -1 * volcano_data$log2Fold.Change [volcano_data$Regulation.Type == "Down"]
+
+volcano_data$entrez=mapIds(org.Hs.eg.db,key=volcano_data$gene_name,column="ENTREZID",keytype="SYMBOL") #ID mapping
+
+volcano_data <- subset(volcano_data, FDR.<0.05) #significant only
+FC=volcano_data$log2Fold.Change
+
+names(FC)=volcano_data$entrez
+head(FC)
+
+kegg1=gage(exprs=FC,gsets=kegg.sets.hs,same.dir=TRUE)
+keggUp1=kegg1$greater
+keggDown1=kegg1$less
+```
+
+```{r}
+keggUp2<-as.data.frame(keggUp1)
+keggUp2<-subset(keggUp2,p.val>0)
+
+keggUp2<-keggUp2[1:20,] #for Ctrl vs SP
+keggUp2<-subset(keggUp2,p.val<0.05) #for Ctrl vs SAE
+                       
+keggUp2$pathway=row.names(keggUp2)
+####################################### calculate rich ratio
+richRatioUp=as.data.frame(cbind(keggUp2[,5],keggUp2[,7]))
+colnames(richRatioUp)=c("GeneNumber","id")
+richRatioUp1=inner_join(x = totalGeneSet, y = richRatioUp, by = 'id')
+keggUp2$ratio=as.integer(richRatioUp1$GeneNumber)/as.integer(richRatioUp1$GeneNoTotal)
+#########################################
+
+keggUp2$pathway <- factor(keggUp2$pathway, levels = keggUp2$pathway[order(-(keggUp2$p.val))]) #order by pvalue
+
+ggplot(keggUp2, aes(x=ratio, y=pathway, size=set.size, color=p.val)) + geom_point() + 
+theme_classic() +scale_color_gradient(low = "red2",  high = "mediumblue", space = "Lab")+xlab("Rich Ratio")+labs(color="P value",size="Gene Number")+ggtitle(title)+ylab("Upregulated KEGG Pathways")
+```
+
+```{r}
+keggDown2<-as.data.frame(keggDown1)
+keggDown2<-subset(keggDown2,p.val>0)
+
+keggDown2<-keggDown2[1:20,] #for Ctrl vs SP
+keggDown2<-subset(keggDown2,p.val<0.05) #for Ctrl vs SAE
+                       
+keggDown2$pathway=row.names(keggDown2)
+####################################### calculate rich ratio
+richratioDown=as.data.frame(cbind(keggDown2[,5],keggDown2[,7]))
+colnames(richratioDown)=c("GeneNumber","id")
+richratioDown1=inner_join(x = totalGeneSet, y = richratioDown, by = 'id')
+keggDown2$ratio=as.integer(richratioDown1$GeneNumber)/as.integer(richratioDown1$GeneNoTotal)
+#########################################
+
+keggDown2$pathway <- factor(keggDown2$pathway, levels = keggDown2$pathway[order(-(keggDown2$p.val))]) #order by pvalue
+
+ggplot(keggDown2, aes(x=ratio, y=pathway, size=set.size, color=p.val)) + geom_point() + 
+theme_classic() +scale_color_gradient(low = "red2",  high = "mediumblue", space = "Lab")+xlab("Rich Ratio")+labs(color="P value",size="Gene Number")+ggtitle(title)+ylab("Downregulated KEGG Pathways")+theme(aspect.ratio=1.5)
+```
