@@ -6,6 +6,6 @@ Previous studies have detected the presence of SARS-CoV-2 viral proteins in bron
 
 ## Groupings
 1. Control - human mesenchymal stem cells-differentiated chondrocytes (hMSCs)
-2. ⁠SP - hMSCs + 10ug full-length SARS-CoV-2 spike protein (SP), 24h
-3. ⁠SAE - hMSCs + 10ug SP + 10ug neutralising antibody to S1 + 100nM ET-1, 24h
+2. ⁠SP - hMSCs + 5 ug/mL full-length SARS-CoV-2 spike protein (SP), 24h
+3. ⁠SAE - hMSCs + 5 ug/mL SP + 5 ug/mL neutralising antibody to S1 + 100nM ET-1, 24h
 Three replicates for each group. Samples are collected for bulk RNA seq.
