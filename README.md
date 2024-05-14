@@ -12,3 +12,13 @@ Three replicates for each group. Samples are collected for bulk RNA seq.
 ## Bioinformatics Analysis
 Raw sequencing reads were first filtered for adapter and low-quality sequences, retaining only reads with a length of 40bp or more. Low-quality sequences were identified as reads with over 5% unknown bases (“N”) or reads with more than 50% of bases having a quality value of 11 or lower.
 Subsequently, the filtered reads were aligned to the GRCh38 reference genome using STAR 2.7.8 (1). RNA expression levels were quantified by RSEM 1.2.31 (2). The default EBSeq 1.18.0 (3) was used to conduct differential expression analysis. The raw sequencing data was deposited in the Gene Expression Omnibus (GSE267009).
+
+## RNAseq Data
+| Sample Information | SRA Accession No. | GEO Accession No. |
+| ----------- | ----------- |----------- |
+| Ctrl, replicate 1| SRR28789040 | GSM8258185 |
+
+## References
+1.​A. Dobin et al., STAR: ultrafast universal RNA-seq aligner. Bioinformatics 29, 15-21 (2013).
+2.​B. Li, C. N. Dewey, RSEM: accurate transcript quantification from RNA-Seq data with or without a reference genome. Bmc Bioinformatics 12,  (2011).
+3.​N. Leng et al., EBSeq: an empirical Bayes hierarchical model for inference in RNA-seq experiments (vol 29, pg 1035, 2013). Bioinformatics 29, 2073-2073 (2013).
