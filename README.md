@@ -16,7 +16,15 @@ Subsequently, the filtered reads were aligned to the GRCh38 reference genome usi
 ## RNAseq Data
 | Sample Information | SRA Accession No. | GEO Accession No. |
 | ----------- | ----------- |----------- |
-| Ctrl, replicate 1| SRR28789040 | GSM8258185 |
+| Control, replicate 1| SRR28789040 | GSM8258185 |
+| Control, replicate 2| SRR28789039 | GSM8258186 |
+| Control, replicate 3| SRR28789038 | GSM8258187 |
+| Treated with 5 ug/mL full-length SARS-CoV-2 spike protein, replicate 1 | SRR28789037 | GSM8258188 |
+| Treated with 5 ug/mL full-length SARS-CoV-2 spike protein, replicate 2 | SRR28789036 | GSM8258189 |
+| Treated with 5 ug/mL full-length SARS-CoV-2 spike protein, replicate 3 | SRR28789035 | GSM8258190 |
+| Treated with a combination of SARS-CoV-2 spike protein (5 ug/mL), the neutralising antibody to S1 region (5 ug/mL), and 100nM endothelin-1, replicate 1 | SRR28789034 | GSM8258191 |
+| Treated with a combination of SARS-CoV-2 spike protein (5 ug/mL), the neutralising antibody to S1 region (5 ug/mL), and 100nM endothelin-1, replicate 2 | SRR28789033 | GSM8258192 |
+| Treated with a combination of SARS-CoV-2 spike protein (5 ug/mL), the neutralising antibody to S1 region (5 ug/mL), and 100nM endothelin-1, replicate 3 | SRR28789032 | GSM8258193 |
 
 ## References
 1.​A. Dobin et al., STAR: ultrafast universal RNA-seq aligner. Bioinformatics 29, 15-21 (2013).
