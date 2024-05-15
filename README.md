@@ -28,7 +28,7 @@ Differential expression analysis was performed using limma 3.58.1 (5) in R. Comp
 
 KEGG pathway and GO functional enrichment analyses of the differentially expressed genes (p< 0.05, Fold Change >1) were conducted using ClusterProfiler 4.0.5 (6) in R70. Enrichment significance was assessed using the hypergeometric test, and p-values were adjusted using the Benjamini-Hochberg (BH) method to obtain q-values. Pathways and GO terms with q<0.05 were considered significantly enriched. Further details can be found in '02_PathwayEnrichment.R', '02_PathwayEnrichment_barplot.R' and '02_PathwayEnrichment_dotplot.R'. Results for each comparison and the generated figures can be found in the corresponding folders in 'New Analysis Results.zip'. 
 
-Heatmaps depicting the expression levels of genes of interest across samples were generated using ggplot2 3.3.5 in R, with unadjusted p-values. Further details can be found in '03_DEGs_Heatmap.R'. The expression level, p-values, and the generated figures can be found in the corresponding folded in 'New Analysis Results.zip'. 
+Heatmaps depicting the expression levels of genes of interest across samples were generated using ggplot2 3.3.5 in R, with unadjusted p-values. Further details can be found in '03_DEGs_Heatmap.R'. The expression level, p-values, and the generated figures can be found in the corresponding folder in 'New Analysis Results.zip'. 
 
 ## RNAseq Data
 | Sample Information | SRA Accession No. | GEO Accession No. |
