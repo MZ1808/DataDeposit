@@ -27,6 +27,6 @@ Subsequently, the filtered reads were aligned to the GRCh38 reference genome usi
 | Treated with a combination of SARS-CoV-2 spike protein (5 ug/mL), the neutralising antibody to S1 region (5 ug/mL), and 100nM endothelin-1, replicate 3 | SRR28789032 | GSM8258193 |
 
 ## References
-1.​A. Dobin et al., STAR: ultrafast universal RNA-seq aligner. Bioinformatics 29, 15-21 (2013).
-2.​B. Li, C. N. Dewey, RSEM: accurate transcript quantification from RNA-Seq data with or without a reference genome. Bmc Bioinformatics 12,  (2011).
-3.​N. Leng et al., EBSeq: an empirical Bayes hierarchical model for inference in RNA-seq experiments (vol 29, pg 1035, 2013). Bioinformatics 29, 2073-2073 (2013).
+1. A. Dobin et al., STAR: ultrafast universal RNA-seq aligner. Bioinformatics 29, 15-21 (2013).
+2. B. Li, C. N. Dewey, RSEM: accurate transcript quantification from RNA-Seq data with or without a reference genome. Bmc Bioinformatics 12,  (2011).
+3. N. Leng et al., EBSeq: an empirical Bayes hierarchical model for inference in RNA-seq experiments (vol 29, pg 1035, 2013). Bioinformatics 29, 2073-2073 (2013).
