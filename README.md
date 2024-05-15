@@ -40,3 +40,4 @@ Genes involved in cellular senescence and cytokine-cytokine interaction were stu
 1. A. Dobin et al., STAR: ultrafast universal RNA-seq aligner. Bioinformatics 29, 15-21 (2013).
 2. B. Li, C. N. Dewey, RSEM: accurate transcript quantification from RNA-Seq data with or without a reference genome. Bmc Bioinformatics 12,  (2011).
 3. N. Leng et al., EBSeq: an empirical Bayes hierarchical model for inference in RNA-seq experiments (vol 29, pg 1035, 2013). Bioinformatics 29, 2073-2073 (2013).
+4. W. Luo et al., GAGE: generally applicable gene set enrichment for pathway analysis. Bmc Bioinformatics 10, 161 (2009).
