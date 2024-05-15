@@ -5,13 +5,14 @@ Previous studies have detected the presence of SARS-CoV-2 viral proteins in bron
 
 ## Groupings
 1. Control - human mesenchymal stem cells-differentiated chondrocytes (hMSCs)
-2. ⁠SP - hMSCs + 10ug full-length SARS-CoV-2 spike protein (SP), 24h
-3. ⁠SAE - hMSCs + 10ug SP + 10ug neutralising antibody to S1 + 100nM ET-1, 24h
+2. ⁠SP - hMSCs + 5 ug/mL full-length SARS-CoV-2 spike protein (SP), 24h
+3. ⁠SAE - hMSCs + 5 ug/mL SP + 5 ug/mL neutralising antibody to S1 + 100nM ET-1, 24h
 Three replicates for each group. Samples are collected for bulk RNA seq.
 
 ## Bioinformatics Analysis
-Raw sequencing reads were first filtered for adapter and low-quality sequences, retaining only reads with a length of 40bp or more. Low-quality sequences were identified as reads with over 5% unknown bases (“N”) or reads with more than 50% of bases having a quality value of 11 or lower.
-Subsequently, the filtered reads were aligned to the GRCh38 reference genome using STAR 2.7.8 (1). RNA expression levels were quantified by RSEM 1.2.31 (2). The default EBSeq 1.18.0 (3) was used to conduct differential expression analysis. The raw sequencing data was deposited in the Gene Expression Omnibus (GSE267009).
+Raw sequencing reads were first filtered for adapter and low-quality sequences, retaining only reads with a length of 40bp or more. Low-quality sequences were identified as reads with over 5% unknown bases (“N”) or reads with more than 50% of bases having a quality value of 11 or lower. Subsequently, the filtered reads were aligned to the GRCh38 reference genome using STAR 2.7.8 (1). RNA expression levels were quantified by RSEM 1.2.31 (2).
+
+The default EBSeq 1.18.0 (3) was used to conduct differential expression analysis. The raw sequencing data was deposited in the Gene Expression Omnibus (GSE267009).
 
 ## RNAseq Data
 | Sample Information | SRA Accession No. | GEO Accession No. |
@@ -25,6 +26,9 @@ Subsequently, the filtered reads were aligned to the GRCh38 reference genome usi
 | Treated with a combination of SARS-CoV-2 spike protein (5 ug/mL), the neutralising antibody to S1 region (5 ug/mL), and 100nM endothelin-1, replicate 1 | SRR28789034 | GSM8258191 |
 | Treated with a combination of SARS-CoV-2 spike protein (5 ug/mL), the neutralising antibody to S1 region (5 ug/mL), and 100nM endothelin-1, replicate 2 | SRR28789033 | GSM8258192 |
 | Treated with a combination of SARS-CoV-2 spike protein (5 ug/mL), the neutralising antibody to S1 region (5 ug/mL), and 100nM endothelin-1, replicate 3 | SRR28789032 | GSM8258193 |
+
+## Directory
+
 
 ## References
 1. A. Dobin et al., STAR: ultrafast universal RNA-seq aligner. Bioinformatics 29, 15-21 (2013).
