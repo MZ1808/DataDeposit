@@ -22,9 +22,9 @@ The default EBSeq 1.18.0 (3) was used to conduct differential expression analysi
 Genes involved in cellular senescence and cytokine-cytokine interaction were studied. Selected DEGs of interest in these pathways were plotted with gplots 3.1.3.1. Normalized gene expression using TPM was presented in heatmaps, with adjusted p-value. Colours were scaled with respect to each row to emphasize the inter-sample difference. Row Z-Score was produced by subtracting the mean value and then divided by the standard deviation of each row. Details of KEGG enrichment analysis can be found in 'source codes_heatmap.Rmd'. The generated figures are included in 'Original Analysis Results.zip'.
 
 ### New Analysis
-Differential expression analysis was performed using limma 3.58.1 in R. Comparisons were made between the Ctrl and SP groups, Ctrl and SAE groups, and SP and SAE groups. Differentially expressed genes and transcripts were identified based on a threshold of p-value < 0.05. Details can be found in '01_DEGs.R'. 
+Differential expression analysis was performed using limma 3.58.1 (5) in R. Comparisons were made between the Ctrl and SP groups, Ctrl and SAE groups, and SP and SAE groups. Differentially expressed genes and transcripts were identified based on a threshold of p-value < 0.05. Details can be found in '01_DEGs.R'. 
 
-KEGG pathway and GO functional enrichment analyses of the differentially expressed genes (p< 0.05, Fold Change >1) were conducted using ClusterProfiler 4.0.5 in R70. Enrichment significance was assessed using the hypergeometric test, and p-values were adjusted using the Benjamini-Hochberg (BH) method to obtain q-values. Pathways and GO terms with q<0.05 were considered significantly enriched. Further details can be found in '02_PathwayEnrichment.R', '02_PathwayEnrichment_barplot.R' and '02_PathwayEnrichment_dotplot.R'.
+KEGG pathway and GO functional enrichment analyses of the differentially expressed genes (p< 0.05, Fold Change >1) were conducted using ClusterProfiler 4.0.5 (6) in R70. Enrichment significance was assessed using the hypergeometric test, and p-values were adjusted using the Benjamini-Hochberg (BH) method to obtain q-values. Pathways and GO terms with q<0.05 were considered significantly enriched. Further details can be found in '02_PathwayEnrichment.R', '02_PathwayEnrichment_barplot.R' and '02_PathwayEnrichment_dotplot.R'.
 
 Heatmaps depicting the expression levels of genes of interest across samples were generated using ggplot2 3.3.5 in R, with unadjusted p-values. Further details can be found in '03_DEGs_Heatmap.R'.
 
@@ -41,11 +41,10 @@ Heatmaps depicting the expression levels of genes of interest across samples wer
 | Treated with a combination of SARS-CoV-2 spike protein (5 ug/mL), the neutralising antibody to S1 region (5 ug/mL), and 100nM endothelin-1, replicate 2 | SRR28789033 | GSM8258192 |
 | Treated with a combination of SARS-CoV-2 spike protein (5 ug/mL), the neutralising antibody to S1 region (5 ug/mL), and 100nM endothelin-1, replicate 3 | SRR28789032 | GSM8258193 |
 
-## Directory
-
-
 ## References
 1. A. Dobin et al., STAR: ultrafast universal RNA-seq aligner. Bioinformatics 29, 15-21 (2013).
 2. B. Li, C. N. Dewey, RSEM: accurate transcript quantification from RNA-Seq data with or without a reference genome. Bmc Bioinformatics 12,  (2011).
 3. N. Leng et al., EBSeq: an empirical Bayes hierarchical model for inference in RNA-seq experiments (vol 29, pg 1035, 2013). Bioinformatics 29, 2073-2073 (2013).
 4. W. Luo et al., GAGE: generally applicable gene set enrichment for pathway analysis. Bmc Bioinformatics 10, 161 (2009).
+5. M. E. Ritchie et al., limma powers differential expression analyses for RNA-sequencing and microarray studies. Nucleic Acids Research, 43, 7 (2015).
+6. G. Yu et al., clusterProfiler: an R package for comparing biological themes among gene clusters. OMICS. 16, 5, 2012.
